@@ -1,257 +1,15 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Cats Den | Defend the Den</title>
-
-<style>
-:root {
-  --blue: #162960;
-  --gold: #F4B425;
-  --lightgold: #FADA92;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--blue);
-  color: white;
-  text-align: center;
-}
-
-.hero { padding: 42px 18px 28px; }
-
-.eyebrow {
-  color: var(--lightgold);
-  letter-spacing: 4px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: clamp(42px, 10vw, 70px);
-  margin: 15px 0 5px;
-  font-weight: 900;
-}
-
-.hero h2 {
-  color: var(--gold);
-  font-size: clamp(25px, 6vw, 40px);
-  margin: 12px 0;
-}
-
-.hero p { color: var(--lightgold); }
-
-.main-photo {
-  width: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  display: block;
-}
-
-.intro { padding: 35px 20px 15px; }
-
-.intro h2 {
-  color: var(--gold);
-  font-size: 32px;
-}
-
-.intro p { line-height: 1.7; }
-
-.gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  padding: 12px;
-}
-
-.gallery img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
-}
-
-.card {
-  background: white;
-  color: var(--blue);
-  max-width: 460px;
-  width: calc(100% - 36px);
-  margin: 25px auto;
-  padding: 28px 22px;
-  border-radius: 20px;
-}
-
-.gold {
-  color: #9b6b00;
-  font-size: 12px;
-  letter-spacing: 2px;
-  font-weight: bold;
-}
-
-.card h2 { font-size: 27px; }
-
-.details {
-  font-size: 17px;
-  line-height: 1.9;
-}
-
-.free {
-  background: var(--gold);
-  padding: 18px 12px;
-  border-radius: 12px;
-  margin-top: 20px;
-}
-
-.free p { margin: 0 0 14px; }
-
-.access-pass-button {
-  display: inline-block;
-  background: var(--blue);
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 14px 18px;
-  border-radius: 10px;
-}
-
-.instagram {
-  display: block;
-  background: var(--blue);
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 17px;
-  border-radius: 12px;
-  margin-top: 18px;
-}
-
-.celebrate {
-  background: var(--gold);
-  color: var(--blue);
-  border: none;
-  padding: 16px 25px;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 15px;
-}
-
-footer {
-  padding: 30px;
-  color: var(--lightgold);
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-#confetti {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 20;
-}
-
-@media (max-width: 420px) {
-  .gallery img { height: 160px; }
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="confetti"></canvas>
-
-<header class="hero">
-  <div class="eyebrow">MONTANA STATE BOBCATS</div>
-  <h1>THE CATS DEN</h1>
-  <h2>WE WANT YOU THERE.</h2>
-  <p>Your student section. Your traditions. Your Den.</p>
-</header>
-
-<img class="main-photo"
-src="DSC05023%20(1).jpg"
-alt="Montana State student section cheering">
-
-<section class="intro">
-  <h2>THIS IS YOUR DEN.</h2>
-  <p>
-    The energy. The traditions. The giveaways.
-    There's nothing like game day in the Brick.
-    Grab your friends and get in the stands!
-  </p>
-</section>
-
-<div class="gallery">
-  <img src="MSU00694%20(3).jpg"
-       alt="Bobcat student section">
-  <img src="MSU06969%20(1).jpg"
-       alt="Bobcat students cheering">
-</div>
-
-<section class="card">
-  <div class="gold">NEXT UP • DEFEND THE DEN</div>
-
-  <h2>BOBCATS vs. GRIZZLIES</h2>
-
-  <div class="details">
-    <strong>Friday, November 20</strong><br>
-    7:00 PM<br>
-    Worthington Arena<br>
-    Volleyball
-  </div>
-
-  <div class="free">
-    <p>
-      <strong>Students get in free with their student Access Pass.</strong>
-    </p>
-
-    <a class="access-pass-button"
-       href="https://montanastate.evenue.net/signin"
-       target="_blank"
-       rel="noopener noreferrer">
-      OPEN STUDENT ACCESS PASS
-    </a>
-  </div>
-
-  <p><strong>BRING YOUR FRIENDS. BRING THE ENERGY.</strong></p>
-</section>
-
-<section class="card">
-  <div class="gold">STAY CONNECTED</div>
-  <h2>FOLLOW THE CATS DEN</h2>
-  <p>
-    Giveaways, student section updates,
-    game day content, and more.
-  </p>
-
-  <a class="instagram"
-     href="https://www.instagram.com/msuthecatsden/"
-     target="_blank"
-     rel="noopener noreferrer">
-    DEFEND THE DEN HERE →
-  </a>
-</section>
-
-<button class="celebrate" onclick="burst()">
-  LET'S GO BOBCATS!
-</button>
-
-<footer>
-  MONTANA STATE UNIVERSITY<br><br>
-  THE CATS DEN • DEFEND THE DEN
-</footer>
-
 <script>
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
+
 let pieces = [];
+
+const bobcatImage = new Image();
+bobcatImage.src = "bobcat-head.png";
+
+const growlSound = new Audio("bobcat-growl.wav");
+growlSound.volume = 0.45;
 
 function resize() {
   canvas.width = window.innerWidth;
@@ -261,79 +19,28 @@ function resize() {
 window.addEventListener("resize", resize);
 resize();
 
-// Draw a small gold bobcat-style head.
-function drawBobcatHead(size) {
-  const s = size / 2;
-
-  ctx.save();
-  ctx.scale(s, s);
-
-  ctx.fillStyle = "#F4B425";
-  ctx.beginPath();
-
-  ctx.moveTo(-0.78, -0.72);
-  ctx.lineTo(-0.28, -0.58);
-  ctx.lineTo(0, -0.78);
-  ctx.lineTo(0.28, -0.58);
-  ctx.lineTo(0.78, -0.72);
-  ctx.lineTo(0.68, -0.18);
-  ctx.lineTo(0.92, 0.12);
-  ctx.lineTo(0.62, 0.16);
-  ctx.lineTo(0.72, 0.48);
-  ctx.lineTo(0.38, 0.38);
-  ctx.lineTo(0, 0.82);
-  ctx.lineTo(-0.38, 0.38);
-  ctx.lineTo(-0.72, 0.48);
-  ctx.lineTo(-0.62, 0.16);
-  ctx.lineTo(-0.92, 0.12);
-  ctx.lineTo(-0.68, -0.18);
-  ctx.closePath();
-  ctx.fill();
-
-  // Face details
-  ctx.fillStyle = "#162960";
-
-  ctx.beginPath();
-  ctx.moveTo(-0.48, -0.35);
-  ctx.lineTo(-0.16, -0.18);
-  ctx.lineTo(-0.34, 0.02);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(0.48, -0.35);
-  ctx.lineTo(0.16, -0.18);
-  ctx.lineTo(0.34, 0.02);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.ellipse(-0.25, -0.02, 0.09, 0.06, 0, 0, Math.PI * 2);
-  ctx.ellipse(0.25, -0.02, 0.09, 0.06, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.moveTo(-0.12, 0.22);
-  ctx.lineTo(0, 0.15);
-  ctx.lineTo(0.12, 0.22);
-  ctx.lineTo(0, 0.32);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.restore();
+// Play the bobcat growl with each confetti burst.
+function playGrowl() {
+  const sound = growlSound.cloneNode();
+  sound.volume = 0.45;
+  sound.play().catch(() => {
+    // Browsers may block sound until the visitor interacts.
+  });
 }
 
 function burst() {
+  playGrowl();
+
   const colors = ["#162960", "#F4B425", "#FADA92"];
 
   for (let i = 0; i < 180; i++) {
-    const isBobcat = Math.random() < 0.22;
+    const isBobcat = Math.random() < 0.25;
 
     pieces.push({
       x: Math.random() * canvas.width,
       y: -20 - Math.random() * 150,
       size: isBobcat
-        ? 15 + Math.random() * 9
+        ? 20 + Math.random() * 12
         : 5 + Math.random() * 8,
       bobcat: isBobcat,
       speed: 2 + Math.random() * 4,
@@ -347,7 +54,9 @@ function burst() {
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  pieces.forEach((p, i) => {
+  for (let i = pieces.length - 1; i >= 0; i--) {
+    const p = pieces[i];
+
     p.x += p.drift;
     p.y += p.speed;
     p.rotation += 4;
@@ -356,9 +65,15 @@ function animate() {
     ctx.translate(p.x, p.y);
     ctx.rotate(p.rotation * Math.PI / 180);
 
-    if (p.bobcat) {
-      drawBobcatHead(p.size);
-    } else {
+    if (p.bobcat && bobcatImage.complete && bobcatImage.naturalWidth > 0) {
+      ctx.drawImage(
+        bobcatImage,
+        -p.size / 2,
+        -p.size / 2,
+        p.size,
+        p.size
+      );
+    } else if (!p.bobcat) {
       ctx.fillStyle = p.color;
       ctx.fillRect(
         -p.size / 2,
@@ -373,14 +88,14 @@ function animate() {
     if (p.y > canvas.height + 25) {
       pieces.splice(i, 1);
     }
-  });
+  }
 
   requestAnimationFrame(animate);
 }
 
+// Initial confetti when the website opens.
 burst();
 animate();
 </script>
 
-</body>
-</html>
+
