@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cats Den | Game Day</title>
+<style>
+:root {
+  --blue: #003B70;
+  --gold: #B9975B;
+  --light: #F5F7FA;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--blue);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+.hero {
+  padding: 65px 20px 35px;
+}
+.scratch {
+  font-size: 38px;
+  color: var(--gold);
+  letter-spacing: 7px;
+}
+h1 {
+  font-size: clamp(38px, 9vw, 65px);
+  margin: 12px 0;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.subtitle {
+  color: #e5d5b5;
+  font-size: 17px;
+}
+.card {
+  background: white;
+  color: var(--blue);
+  border-radius: 22px;
+  padding: 30px 22px;
+  max-width: 430px;
+  margin: 25px auto;
+  width: calc(100% - 36px);
+  box-shadow: 0 12px 30px #001c35;
+}
+.tag {
+  color: #98763e;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+h2 { font-size: 27px; margin: 12px 0; }
+.game-details {
+  line-height: 1.9;
+  font-size: 17px;
+}
+.button {
+  display: block;
+  background: var(--gold);
+  color: #092b4b;
+  text-decoration: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 16px;
+  transition: transform .2s;
+}
+.button:hover { transform: scale(1.03); }
+.instagram {
+  background: white;
+  color: var(--blue);
+  border: 2px solid var(--gold);
+}
+footer {
+  padding: 30px 15px 45px;
+  color: #e5d5b5;
+  font-size: 13px;
+}
+#confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+</style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<section class="hero">
+  <div class="scratch">/// /// ///</div>
+  <h1>THE CATS DEN</h1>
+  <p class="subtitle">THE PLACE TO BE ON GAME DAY.</p>
+</section>
+
+<section class="card">
+  <div class="tag">NEXT UP • DEFEND THE DEN</div>
+  <h2>BOBCATS vs. GRIZZLIES</h2>
+  <div class="game-details">
+    <strong>Friday, November 20</strong><br>
+    7:00 PM<br>
+    Worthington Arena at the Brick<br>
+    Volleyball
+  </div>
+  <a class="button" href="https://msubobcats.com/" target="_blank">
+    GAME & TICKET INFO
+  </a>
+</section>
+
+<section class="card">
+  <div class="tag">STAY CONNECTED</div>
+  <h2>Follow The Cats Den</h2>
+  <p>Giveaways, student section updates, and everything game day.</p>
+  <a class="button instagram"
+     href="https://www.instagram.com/"
+     target="_blank">
+    FOLLOW US ON INSTAGRAM
+  </a>
+</section>
+
+<footer>
+  MONTANA STATE BOBCATS<br>
+  DEFEND THE DEN.
+</footer>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let pieces = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+function burst() {
+  pieces = [];
+  for (let i = 0; i < 140; i++) {
+    pieces.push({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height,
+      size: 5 + Math.random() * 8,
+      speed: 2 + Math.random() * 5,
+      drift: (Math.random() - .5) * 3,
+      rotation: Math.random() * 360,
+      color: Math.random() > .5 ? "#B9975B" : "#FFFFFF"
+    });
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  pieces.forEach((p, i) => {
+    p.y += p.speed;
+    p.x += p.drift;
+    p.rotation += 4;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size * .7);
+    ctx.restore();
+    if (p.y > canvas.height + 20) pieces.splice(i, 1);
+  });
+  requestAnimationFrame(animate);
+}
+burst();
+animate();
+</script>
+
+</body>
+</html>
