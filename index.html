@@ -115,6 +115,8 @@
       letter-spacing: 1px;
       font-size: 0.95rem;
       transition: transform 0.2s;
+      border: none;
+      cursor: pointer;
     }
 
     .button:active {
@@ -258,8 +260,10 @@
     const bobcatImage = new Image();
     bobcatImage.src = "bobcat-head.png";
 
-    const growlSound = new Audio("Bobcat Growl_Short_2013.wav");
-    growlSound.volume = 0.45;
+    // Bobcat growl sound
+    const growlSound = new Audio("bobcat-growl.wav");
+    growlSound.volume = 0.65;
+    growlSound.preload = "auto";
 
     function resize() {
       canvas.width = window.innerWidth;
@@ -269,18 +273,17 @@
     window.addEventListener("resize", resize);
     resize();
 
+    // Play sound when someone clicks the button
     function playGrowl() {
-      const sound = growlSound.cloneNode();
-      sound.volume = 0.45;
+      growlSound.pause();
+      growlSound.currentTime = 0;
 
-      sound.play().catch(() => {
-        // Sound may be blocked until the visitor interacts.
+      growlSound.play().catch(error => {
+        console.log("Sound could not play:", error);
       });
     }
 
-    function burst() {
-      playGrowl();
-
+    function launchConfetti() {
       const colors = ["#162960", "#F4B425", "#FADA92"];
 
       for (let i = 0; i < 180; i++) {
@@ -299,6 +302,12 @@
           color: colors[Math.floor(Math.random() * colors.length)]
         });
       }
+    }
+
+    // Button click: sound + confetti
+    function burst() {
+      playGrowl();
+      launchConfetti();
     }
 
     function animate() {
@@ -347,11 +356,10 @@
       requestAnimationFrame(animate);
     }
 
-    // Initial confetti when the website opens.
-    burst();
+    // Confetti on website opening (no sound until a click)
+    launchConfetti();
     animate();
   </script>
 
 </body>
 </html>
-
