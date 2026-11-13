@@ -23,9 +23,7 @@ body {
   text-align: center;
 }
 
-.hero {
-  padding: 42px 18px 28px;
-}
+.hero { padding: 42px 18px 28px; }
 
 .eyebrow {
   color: var(--lightgold);
@@ -46,10 +44,7 @@ h1 {
   margin: 12px 0;
 }
 
-.hero p {
-  color: var(--lightgold);
-  font-size: 16px;
-}
+.hero p { color: var(--lightgold); }
 
 .main-photo {
   width: 100%;
@@ -58,18 +53,14 @@ h1 {
   display: block;
 }
 
-.intro {
-  padding: 35px 20px 15px;
-}
+.intro { padding: 35px 20px 15px; }
 
 .intro h2 {
   color: var(--gold);
   font-size: 32px;
 }
 
-.intro p {
-  line-height: 1.7;
-}
+.intro p { line-height: 1.7; }
 
 .gallery {
   display: grid;
@@ -102,9 +93,7 @@ h1 {
   font-weight: bold;
 }
 
-.card h2 {
-  font-size: 27px;
-}
+.card h2 { font-size: 27px; }
 
 .details {
   font-size: 17px;
@@ -113,18 +102,21 @@ h1 {
 
 .free {
   background: var(--gold);
-  padding: 16px 10px;
+  padding: 18px 12px;
   border-radius: 12px;
   margin-top: 20px;
 }
 
-.free h3 {
-  margin: 0 0 6px;
-  font-size: 20px;
-}
+.free p { margin: 0 0 14px; }
 
-.free p {
-  margin: 0;
+.access-pass-button {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 14px 18px;
+  border-radius: 10px;
 }
 
 .instagram {
@@ -216,8 +208,16 @@ alt="Montana State student section cheering">
   </div>
 
   <div class="free">
-    <h3>STUDENTS GET IN FREE!</h3>
-    <p>Just bring your student AccessPass.</p>
+    <p>
+      <strong>Students get in free with their student Access Pass.</strong>
+    </p>
+
+    <a class="access-pass-button"
+       href="https://montanastate.evenue.net/signin"
+       target="_blank"
+       rel="noopener noreferrer">
+      OPEN STUDENT ACCESS PASS
+    </a>
   </div>
 
   <p><strong>BRING YOUR FRIENDS. BRING THE ENERGY.</strong></p>
@@ -233,7 +233,8 @@ alt="Montana State student section cheering">
 
   <a class="instagram"
      href="https://www.instagram.com/msuthecatsden/"
-     target="_blank">
+     target="_blank"
+     rel="noopener noreferrer">
     DEFEND THE DEN HERE →
   </a>
 </section>
@@ -260,14 +261,81 @@ function resize() {
 window.addEventListener("resize", resize);
 resize();
 
+// Draw a small gold bobcat-style head.
+function drawBobcatHead(size) {
+  const s = size / 2;
+
+  ctx.save();
+  ctx.scale(s, s);
+
+  ctx.fillStyle = "#F4B425";
+  ctx.beginPath();
+
+  ctx.moveTo(-0.78, -0.72);
+  ctx.lineTo(-0.28, -0.58);
+  ctx.lineTo(0, -0.78);
+  ctx.lineTo(0.28, -0.58);
+  ctx.lineTo(0.78, -0.72);
+  ctx.lineTo(0.68, -0.18);
+  ctx.lineTo(0.92, 0.12);
+  ctx.lineTo(0.62, 0.16);
+  ctx.lineTo(0.72, 0.48);
+  ctx.lineTo(0.38, 0.38);
+  ctx.lineTo(0, 0.82);
+  ctx.lineTo(-0.38, 0.38);
+  ctx.lineTo(-0.72, 0.48);
+  ctx.lineTo(-0.62, 0.16);
+  ctx.lineTo(-0.92, 0.12);
+  ctx.lineTo(-0.68, -0.18);
+  ctx.closePath();
+  ctx.fill();
+
+  // Face details
+  ctx.fillStyle = "#162960";
+
+  ctx.beginPath();
+  ctx.moveTo(-0.48, -0.35);
+  ctx.lineTo(-0.16, -0.18);
+  ctx.lineTo(-0.34, 0.02);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(0.48, -0.35);
+  ctx.lineTo(0.16, -0.18);
+  ctx.lineTo(0.34, 0.02);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.ellipse(-0.25, -0.02, 0.09, 0.06, 0, 0, Math.PI * 2);
+  ctx.ellipse(0.25, -0.02, 0.09, 0.06, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(-0.12, 0.22);
+  ctx.lineTo(0, 0.15);
+  ctx.lineTo(0.12, 0.22);
+  ctx.lineTo(0, 0.32);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.restore();
+}
+
 function burst() {
   const colors = ["#162960", "#F4B425", "#FADA92"];
 
   for (let i = 0; i < 180; i++) {
+    const isBobcat = Math.random() < 0.22;
+
     pieces.push({
       x: Math.random() * canvas.width,
       y: -20 - Math.random() * 150,
-      size: 5 + Math.random() * 8,
+      size: isBobcat
+        ? 15 + Math.random() * 9
+        : 5 + Math.random() * 8,
+      bobcat: isBobcat,
       speed: 2 + Math.random() * 4,
       drift: (Math.random() - 0.5) * 3,
       rotation: Math.random() * 360,
@@ -287,12 +355,22 @@ function animate() {
     ctx.save();
     ctx.translate(p.x, p.y);
     ctx.rotate(p.rotation * Math.PI / 180);
-    ctx.fillStyle = p.color;
-    ctx.fillRect(-p.size/2, -p.size/2,
-                 p.size, p.size);
+
+    if (p.bobcat) {
+      drawBobcatHead(p.size);
+    } else {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(
+        -p.size / 2,
+        -p.size / 2,
+        p.size,
+        p.size
+      );
+    }
+
     ctx.restore();
 
-    if (p.y > canvas.height + 20) {
+    if (p.y > canvas.height + 25) {
       pieces.splice(i, 1);
     }
   });
@@ -306,4 +384,3 @@ animate();
 
 </body>
 </html>
-
